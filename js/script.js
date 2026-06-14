@@ -4932,3 +4932,18 @@ function dispatchNativeBrowserAlert(title, message) {
     }
   }
 }
+document
+.getElementById("clearCompletedBtn")
+?.addEventListener("click", () => {
+
+  if (!confirm(
+    "Remove all completed tasks?"
+  )) return;
+
+  tasks = tasks.filter(
+    task => !task.completed
+  );
+
+  saveData();
+  renderTasks();
+});
