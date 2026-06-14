@@ -1424,7 +1424,12 @@ function addTask() {
   if (prioritySelect && prioritySelect.value && prioritySelect.value.trim() !== "") {
     priority = prioritySelect.value;
   }
-  
+ const newTask = {
+  id: generateTaskId(),
+  text: taskText,
+  completed: false,
+  isNew: true,
+};
   const text = taskInput.value.trim();
   const tags = parseTags(taskTagsInput ? taskTagsInput.value : "");
 
@@ -1569,6 +1574,16 @@ function createTaskEl(task) {
       </button>
       <button class="icon-btn delete-btn" aria-label="Delete Quest">
         <i class="ri-delete-bin-6-line"></i>
+        const li = document.createElement("li");
+        if (task.isNew) {
+  li.classList.add("new-task-highlight");
+
+  setTimeout(() => {
+    task.isNew = false;
+    saveData();
+    renderTasks();
+  }, 5000);
+}
       </button>
     </div>
   `;
